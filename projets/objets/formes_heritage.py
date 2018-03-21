@@ -9,17 +9,41 @@ import math
 from objets import points
 
 
-class Rectangle:
+class Forme(object):
+    """
+    Forme geometrique avec un point d'origine
+    """
+    def __init__(self, origine):
+        """ creation d'une forme"""
+        self.origine = copy(origine) #from copy import copy
+
+    def __str__(self):
+        """x.__str__() => str(x)"""
+        return "Forme: origine={}".format(self.origine)
+
+    def surface(self):
+        """calcul de la surface"""
+        return None
+
+    def perimetre(self):
+        """calcul du perimetre"""
+        return None
+
+    def deplacer(self, deplx, deply):
+        """ deplace la forme geometrique"""
+        self.origine.deplacer(deplx, deply)
+
+
+class Rectangle(Forme):
     """
     Rectangle avec longueur et largeur
     """
-    def __init__(self, long, larg, origine):
+    def __init__(self, origine, long, larg ):
         """ creation d'un rectangle"""
+        Forme.__init__(self, origine)
+        #super().__init__(origine)
         self.long = float(long)
         self.larg = float(larg)
-        #self.origine = points.Point(origine.abscisse, origine.ordonnee)
-        #self.origine = origine.__copy__()
-        self.origine = copy(origine) #from copy import copy
 
     def __str__(self):
         """x.__str__() => str(x)"""
@@ -33,8 +57,6 @@ class Rectangle:
         """calcul du perimetre"""
         return 2 * (self.long + self.larg)
 
-    def deplacer(self, deplx, deply):
-        self.origine.deplacer(deplx, deply)
 
 
 class Cercle:
@@ -66,8 +88,8 @@ class Cercle:
 if __name__ == "__main__":
     PT1 = points.Point(1, 2)
     print(PT1)
-    REC1 = Rectangle(3, 3, PT1)
-    REC2 = Rectangle(4, 6, PT1)
+    REC1 = Rectangle(PT1, 3, 3)
+    REC2 = Rectangle(PT1, 4, 6)
     print("REC1:", REC1)
     print("surface :", REC1.surface())
     print("perimetre :", REC1.perimetre())
