@@ -35,6 +35,9 @@ class Point:
         distance = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2) )
         print("distance : {0:.2f}".format(distance))
 
+    def __copy__(self):
+        return Point(self.abscisse, self.ordonnee)
+
 if __name__ == "__main__":
     POINT1 = Point(1, 1)
     print(POINT1.__str__())
