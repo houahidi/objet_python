@@ -59,15 +59,15 @@ class Rectangle(Forme):
 
 
 
-class Cercle:
+class Cercle(Forme):
     """
     Cercle avec un rayon et un point d'origine
     """
 
-    def __init__(self, rayon, origine):
+    def __init__(self,origine, rayon):
         """ creation d'un rectangle"""
+        Forme.__init__(self, origine)
         self.rayon = float(rayon)
-        self.origine = copy(origine)  # from copy import copy
 
     def __str__(self):
         """x.__str__() => str(x)"""
@@ -80,9 +80,6 @@ class Cercle:
     def perimetre(self):
         """calcul du perimetre"""
         return 2 * math.pi * self.rayon
-
-    def deplacer(self, deplx, deply):
-        self.origine.deplacer(deplx, deply)
 
 
 if __name__ == "__main__":
@@ -99,7 +96,7 @@ if __name__ == "__main__":
     REC1.deplacer(3, 6)
     print("REC1:", REC1)
     print("REC2:", REC2)
-    CER1 = Cercle(4, PT1)
+    CER1 = Cercle(PT1, 3)
     print("Cercle CER1:", CER1)
     print("surface :", CER1.surface())
     print("perimetre :", CER1.perimetre())

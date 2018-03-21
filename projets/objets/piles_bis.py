@@ -46,20 +46,18 @@ class Pile(object):
         """calcule le nombre d'elements empiles"""
         return len(self.elements)
 
-    def __copy__(self):
-        clone = Pile(self.taille)
-        clone.elements = copy.deepcopy(self.elements)
-        return clone
-
     def __iter__(self):
         print("__iter__")
-        return copy.copy(self)
+        self.indice = 0
+        return self
 
     def __next__(self):
         print("__next__")
         if len(self) > 0:
-            return self.depiler()
+            self.indice += 1
+            return self.elements[self.indice - 1]
         else:
+            del self.indice
             raise StopIteration()
 
 
@@ -74,6 +72,7 @@ if __name__ == "__main__":
         print(e)
     print("==taille de la pile :", len(PILE1))
     indice = 1
+
     for elem in PILE1:
         print("iteration ", indice, "=", elem)
         indice += 1
