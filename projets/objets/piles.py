@@ -2,6 +2,17 @@
 Gestion des piles de type FILO
 """
 
+class PileException(Exception):
+    """Erreur de manipulation de la pile"""
+
+    def __init__(self, message="erreur de pile"):
+        Exception.__init__(self, message)
+
+    def __str__(self):
+        return "PileException: erreur = {}".format(self.args[0])
+
+
+
 class Pile(object):
     """
     Pile FILO
@@ -16,16 +27,14 @@ class Pile(object):
         if len(self) < self.taille:# if len(self.elements) < self.taille
             self.elements.append(element)
         else:
-            print("La pile est pleine : taille {} est depassee".format(self.taille))
+            raise PileException("La pile est pleine : taille {} est depassee".format(self.taille))
 
     def depiler(self):
         """retoune le dernier element empile"""
-        return self.elements.pop(-1)
-
         if self.elements:
             return self.elements.pop(-1)
         else:
-            print("La pile est vide")
+            raise PileException("La pile est vide")
 
     def __str__(self):
         """str(p) ==> p.__str__()"""
@@ -39,12 +48,18 @@ class Pile(object):
 if __name__ == "__main__":
     PILE1 = Pile(2)
     print(PILE1)
-    PILE1.empiler("elem1")
-    PILE1.empiler("elem2")
-    PILE1.empiler("elem3")
+    try:
+        PILE1.empiler("elem1")
+        PILE1.empiler("elem2")
+        PILE1.empiler("elem3")
+    except PileException as e:
+        print(e)
     print("taille de la pile :", len(PILE1))
-    print("elem depile :", PILE1.depiler())
-    print("elem depile :", PILE1.depiler())
-    print("elem depile :", PILE1.depiler())
+    try:
+        print("elem depile :", PILE1.depiler())
+        print("elem depile :", PILE1.depiler())
+        print("elem depile :", PILE1.depiler())
+    except PileException as e:
+        print(e)
     print("taille de la pile :", len(PILE1))
 
