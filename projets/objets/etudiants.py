@@ -1,8 +1,6 @@
 """
 gestion des etudiants
 """
-from numpy import random
-
 
 class Etudiant(object):
     """etudiant"""

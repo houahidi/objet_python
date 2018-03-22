@@ -1,7 +1,7 @@
 # *-* coding:utf8 -*-
 """
 gestion des comptes bancaires
-un compte a une numéro et un solde
+un compte avec un numéro et un solde
 """
 
 
