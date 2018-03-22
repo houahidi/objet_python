@@ -11,34 +11,45 @@ class Compte(object):
         """constructeur : initialiser un compte """
         if numero  is None:
             numero = input("saisir le num :")
-        self.numero = numero
-        self.solde = 100
+        self.__numero = numero
+        self.__solde = 100
         #pas besoin de retour: c'est le role d'un constructeur
         #return {"numero": numero, "solde": 100}
 
     def afficher(self):
         """ afficher le compte"""
-        print("Compte(numero:{}, solde:{})".format(self.numero, self.solde))
+        print("Compte(numero:{}, solde:{})".format(self.__numero, self.__solde))
 
     def crediter(self, somme):
         """
         crediter la somme
         """
-        self.solde += somme
+        self.__solde += somme
 
     def debiter(self, somme):
         """
         debiter la somme
         """
-        if somme < self.solde:
-            self.solde -= somme
+        if somme < self.__solde:
+            self.__solde -= somme
         else:
             print("découvert non autorisé")
+
+    def __get__numero(self):
+        return self.__numero
+
+    def __get__solde(self):
+        return self.__solde
+
+    numero = property(__get__numero, None, None, "Le numero")
+    solde = property(__get__solde, None, None, "Le solde")
 
 
 if __name__ == "__main__":
     CT1 = Compte(12)
     print("numero :", CT1.numero)
+    #CT1.solde = 3000 # n'est pas autorise
+    print("solde :", CT1.solde)
     CT1.afficher()
     CT1.crediter(100)
     CT1.afficher()
