@@ -1,4 +1,11 @@
+import sys
+
 print("====debut programme principal", __name__)
+
+print("path python : ", sys.path)
+print("argument du programme :", sys.argv)
+
+
 from fonctionnel.fonctions import *
 
 moyenne(1, 4, 6)
